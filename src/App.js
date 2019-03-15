@@ -67,6 +67,7 @@ class App extends React.Component {
         messages={langMap[rootStore.locale]}>
         <LocaleProvider locale={antdLangMap[rootStore.locale]}>
           <Provider rootStore={rootStore}>
+              {/* 路由 react-route-dom 使用参考：https://juejin.im/post/5a7e9ee7f265da4e7832949c */}
             <Router>
               <Switch>
                 <Route exact path='/' render={() => <Redirect to={`${config.adminBasePath}/dashboard`} push/>}/>
