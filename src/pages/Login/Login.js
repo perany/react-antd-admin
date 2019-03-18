@@ -28,6 +28,11 @@ class Login extends PureComponent {
         })
     }
 
+    //username change
+    usernameChange = (e) => {
+        console.log(e)
+    }
+
     render() {
         const {form} = this.props
         const {getFieldDecorator} = form
@@ -46,6 +51,7 @@ class Login extends PureComponent {
                                 <Input
                                     prefix={<Icon type="user" style={{color: 'rgba(0,0,0,.25)'}}/>}
                                     placeholder="请输入用户名"
+                                    onChange={this.usernameChange}
                                 />
                             )}
                         </FormItem>
