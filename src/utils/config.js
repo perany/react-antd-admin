@@ -4,7 +4,7 @@
  */
 module.exports = {
   siteName: 'React Admin',
-  copyright: `react-antd-admin ©${new Date().getFullYear()} Created by heller.sun@foxmail.com`,
+  copyright: `react-antd-admin ©${new Date().getFullYear()} Created by perany`,
   logoPath: '/logo.svg',
   adminBasePath: '/app',
 
