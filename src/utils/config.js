@@ -3,9 +3,9 @@
  * @type {{copyright: string, logoPath: string, siteName: string, i18n: {defaultLanguage: string, languages: *[]}}}
  */
 module.exports = {
-  siteName: 'React Admin',
+  siteName: '海外客服系统',
   copyright: `react-antd-admin ©${new Date().getFullYear()} Created by perany`,
-  logoPath: '/logo.svg',
+  logoPath: '/Combined-Shape@2x.png',
   adminBasePath: '/app',
 
   /* I18n configuration */

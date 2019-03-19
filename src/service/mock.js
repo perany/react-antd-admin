@@ -4,7 +4,7 @@ Mock.setup({timeout: '300 - 2200'})
 
 Mock.mock('/login', 'post', (req) => {
   const {username, password} = JSON.parse(req.body)
-  if (username === 'admin' && password === 'admin') {
+  if (username === 'admin' && password === '123456') {
     return {
       code: 0,
       data: {

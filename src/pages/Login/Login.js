@@ -1,9 +1,10 @@
-import React, {Fragment, PureComponent} from 'react'
-import {Button, Form, Icon, Input, Row} from 'antd'
+import React, {PureComponent} from 'react'
+import {Button, Form, Input, Row} from 'antd'
 import styles from './Login.module.less'
 import {setToken} from '../../utils/tools'
 import {FormattedMessage} from 'react-intl'
 import {inject} from 'mobx-react'
+import config from '../../utils/config'
 
 const FormItem = Form.Item
 
@@ -28,82 +29,54 @@ class Login extends PureComponent {
         })
     }
 
-    //username change
-    usernameChange = (e) => {
-        console.log(e)
-    }
-
     render() {
         const {form} = this.props
         const {getFieldDecorator} = form
         return (
-            <Fragment>
+            <div className={styles.login}>
                 <div className={styles.form}>
-                    <div className={styles.logo}>
-                        {/*<img alt='logo' src={config.logoPath}/>*/}
-                        <span>{Config.siteName}</span>
+                    <div className={styles.toolbar}>
+                        <div className={`${styles.circle} ${styles.red}`}/>
+                        <div className={`${styles.circle} ${styles.yellow}`}/>
+                        <div className={`${styles.circle} ${styles.green}`}/>
+                    </div>
+                    <div className={styles.titleCon}>
+                        <img alt='logo' src={config.logoPath}/>
+                        <div>{Config.siteName}</div>
                     </div>
                     <Form onSubmit={this.handleSubmit}>
-                        <FormItem hasFeedback>
+                        <FormItem hasFeedback className={styles.inputCon}>
                             {getFieldDecorator('username', {
-                                rules: [{required: true, message: '请输入用户名!'}]
+                                rules: [{required: true, message: '请输入账号'}]
                             })(
                                 <Input
-                                    prefix={<Icon type="user" style={{color: 'rgba(0,0,0,.25)'}}/>}
-                                    placeholder="请输入用户名"
-                                    onChange={this.usernameChange}
+                                    type='text'
+                                    prefix={<i className={styles.user}/>}
+                                    placeholder="请输入账号"
                                 />
                             )}
                         </FormItem>
-                        <FormItem hasFeedback>
+                        <FormItem hasFeedback className={styles.inputCon}>
                             {getFieldDecorator('password', {
-                                rules: [{required: true, message: '请输入密码!'}]
+                                rules: [{required: true, message: '请输入密码'}]
                             })(
                                 <Input
                                     type='password'
-                                    prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
+                                    prefix={<i className={styles.pwd}/>}
                                     placeholder={`请输入密码`}
                                 />
                             )}
                         </FormItem>
-                        <Row>
+                        <Row type={"flex"} justify={"center"}>
                             <Button
                                 type='primary'
                                 htmlType={'submit'}>
                                 <FormattedMessage id='intl.signIn'/>
                             </Button>
-                            <p>
-                                <span>Username：admin</span>
-                                <span>Password：admin</span>
-                            </p>
                         </Row>
                     </Form>
                 </div>
-                <div className={styles.footer}>
-                    <footer className={styles['footer-view']}>
-                        <div className={styles['footer-view-links']}>
-                          <span>
-                            <a
-                                title='github'
-                                rel="noopener noreferrer"
-                                target='_blank'
-                                href='https://github.com/shx996/react-antd-admin'>
-                            <Icon type="github"/>
-                          </a>
-                          </span>
-                            <span
-                                onClick={() => {
-                                    this.props.rootStore.changeLocale('en')
-                                }}>English</span>
-                            <span
-                                onClick={() => {
-                                    this.props.rootStore.changeLocale('zh')
-                                }}>中文</span>
-                        </div>
-                        <div className={styles['footer-copyright']}>Ant Design Admin © 2019 perany</div>
-                    </footer>
-                </div>
-            </Fragment>
+            </div>
         )
     }
 }
