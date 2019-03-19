@@ -32,7 +32,7 @@ const Login = Loadable({
 
 const Main = Loadable({
   loading,
-  loader: () => import('./Main')
+  loader: () => import('./components/Layout/LayoutCustomer')
 })
 
 const NotFound = Loadable({

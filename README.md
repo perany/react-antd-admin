@@ -24,7 +24,6 @@
       App.less
       App.test.js
       index.js
-      Main.js
       serviceWorker.js
     .gitignore
     config-overrides.js     // 重写项目默认配置
