@@ -48,7 +48,7 @@ export default {
         return axiosRequest({
             url,
             method: 'GET',
-            loading: true,
+            loading: false,
             ...config
         })
     },
@@ -56,7 +56,7 @@ export default {
         return axiosRequest({
             url,
             method: 'POST',
-            loading: true,
+            loading: false,
             ...config
         })
     }
