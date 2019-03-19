@@ -1,10 +1,11 @@
 import React, {Component, Fragment} from 'react'
 import {Link, withRouter} from 'react-router-dom'
-import {Icon, Layout, Menu} from 'antd'
+import {Icon, Layout, Menu, Row} from 'antd'
 import PropTypes from 'prop-types'
 import routes from '../../routes/config'
 import {inject} from 'mobx-react'
 import styles from './SiderCustom.module.less'
+import config from './../../utils/config'
 
 @inject('rootStore')
 class SiderCustom extends Component {
@@ -106,15 +107,18 @@ class SiderCustom extends Component {
     render() {
         return (
             <Layout.Sider
-                width={240}
-                collapsedWidth={90}
-                trigger={this.renderTrigger('KINGNET')}
+                theme={"light"}
+                width={220}
+                collapsedWidth={70}
+                trigger={null}
                 collapsible
                 collapsed={this.props.collapsed}
+                className={styles.sideBar}
             >
-                <div className={styles.logo}>PERANY</div>
-                <Menu theme='dark'
-                      mode='inline'
+                <Row type={"flex"} className={styles.logo}>
+                    <div className={styles.titleIcon}/>{config.siteName}
+                    </Row>
+                <Menu mode='inline'
                       inlineCollapsed={this.props.collapsed}
                       selectedKeys={[this.state.selectedKey]}
                       openKeys={this.state.openKey}
