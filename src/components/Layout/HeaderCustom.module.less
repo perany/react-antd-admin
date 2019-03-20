@@ -1,4 +1,4 @@
-@headerH: 62px;
+@headerH: 0.6rem;
 .header {
   padding: 0;
   box-shadow: 4px 4px 40px 0 rgba(0, 0, 0, .05);
@@ -8,7 +8,8 @@
   height: @headerH;
   z-index: 9;
   align-items: center;
-  background-color: #fff;
+  background-color: #667B99;
+  color: #fff;
 
   .button {
     height: @headerH;
@@ -18,8 +19,7 @@
     cursor: pointer;
 
     &:hover {
-      color: #1890ff;
-      background-color: #f9f9fc;
+      background:rgba(0,0,0,0.1);
     }
 
     .trigger {
@@ -30,32 +30,36 @@
   .right-container {
     display: flex;
     align-items: center;
-  }
 
-  :global {
-    .ant-menu {
-      height: @headerH;
-      border-bottom: none;
-    }
-
-    .ant-menu-submenu-title {
-      height: @headerH;
-    }
-
-    .ant-menu-horizontal {
-      line-height: @headerH;
-
-      > .ant-menu-submenu {
-        top: 0;
-        margin-top: 0;
+    :global {
+      .ant-menu {
+        min-height: @headerH;
         border-bottom: none;
+        background-color: #667B99;
+        color: #fff;
+      }
 
-        &:hover {
-          color: #1890ff;
-          background-color: #f9f9fc;
+      .ant-menu-submenu-title,.ant-menu-submenu-title:hover,.ant-menu-submenu-selected{
+        color: #fff;
+      }
+
+      .ant-menu-horizontal {
+        line-height: @headerH;
+
+        > .ant-menu-submenu {
+          top: 0;
+          margin-top: 0;
           border-bottom: none;
+
+          &:hover {
+            color: #fff;
+            background:rgba(0,0,0,0.1);
+            border-bottom: none;
+          }
         }
       }
     }
   }
 }
+
+

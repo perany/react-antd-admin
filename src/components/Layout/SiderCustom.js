@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react'
+import React, {Component} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import {Icon, Layout, Menu, Row} from 'antd'
 import PropTypes from 'prop-types'

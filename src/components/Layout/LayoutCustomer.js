@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import {Breadcrumb, Icon, Layout} from 'antd'
-import {SiderCustom, HeaderCustom} from './../'
+import {SiderCustom, HeaderCustom} from '../'
 import Routes from './../../routes'
 import routesConfig from './../../routes/config'
 import {Link} from 'react-router-dom'
@@ -80,8 +80,9 @@ class LayoutCustomer extends Component {
                 <Layout>
                     <HeaderCustom
                         user={{
-                            avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-                            userName: 'Guest'
+                            userName: 'Admin',
+                            realName:'张三',
+                            role:"管理员"
                         }}
                         collapased={collapsed}
                         onCollapseChange={this.onCollapseChange}
