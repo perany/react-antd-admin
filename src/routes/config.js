@@ -9,22 +9,22 @@ const loading = (props) => {
     return null
 }
 
-const Dashboard = Loadable({
-    loading,
-    loader: () => import('../pages/Dashboard/Dashboard')
-})
 const Users = Loadable({
     loading,
     loader: () => import('../pages/Users/Users')
 })
+const Order = Loadable({
+    loading,
+    loader: () => import('../pages/Order/Order')
+})
 
 export default [
     {
-        key: '/app/dashboard',
-        title: 'Dashboard',
+        key: '/app/order',
+        title: 'Order',
         zhTitle: '工单处理',
-        icon: 'dashboard',
-        component: Dashboard
+        icon: 'Order',
+        component: Order
     },
     {
         key: '/app/user',

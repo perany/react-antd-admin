@@ -87,41 +87,38 @@ class LayoutCustomer extends Component {
                         collapased={collapsed}
                         onCollapseChange={this.onCollapseChange}
                         onSignOut={this.onSignOut}/>
-                    <Breadcrumb style={{margin: '15px 16px'}}>
-                        {
-                            location.pathname !== '/app/dashboard' &&
-                            <Breadcrumb.Item>
-                                <Link to='/app/dashboard' className='breadcrumb-link'>
-                                    <Icon type='dashboard'/>
-                                    <span>Dashboard</span>
-                                </Link>
-                            </Breadcrumb.Item>
-                        }
-                        {this._breadcrumbList.map((item, index) => {
-                            return (
-                                <Breadcrumb.Item key={index}>
-                                    {item.key ?
-                                        <Link to={item.key} className='breadcrumb-link'>
-                                            {item.icon && <Icon type={item.icon}/>}
-                                            <span>{item.title}</span>
-                                        </Link> :
-                                        <Fragment>
-                                            {item.icon && <Icon type={item.icon}/>}
-                                            <span>{item.title}</span>
-                                        </Fragment>
-                                    }
-                                </Breadcrumb.Item>)
-                        })}
-                    </Breadcrumb>
+                    {/*<Breadcrumb style={{margin: '15px 16px'}}>*/}
+                        {/*{*/}
+                            {/*location.pathname !== '/app/dashboard' &&*/}
+                            {/*<Breadcrumb.Item>*/}
+                                {/*<Link to='/app/dashboard' className='breadcrumb-link'>*/}
+                                    {/*<Icon type='dashboard'/>*/}
+                                    {/*<span>Dashboard</span>*/}
+                                {/*</Link>*/}
+                            {/*</Breadcrumb.Item>*/}
+                        {/*}*/}
+                        {/*{this._breadcrumbList.map((item, index) => {*/}
+                            {/*return (*/}
+                                {/*<Breadcrumb.Item key={index}>*/}
+                                    {/*{item.key ?*/}
+                                        {/*<Link to={item.key} className='breadcrumb-link'>*/}
+                                            {/*{item.icon && <Icon type={item.icon}/>}*/}
+                                            {/*<span>{item.title}</span>*/}
+                                        {/*</Link> :*/}
+                                        {/*<Fragment>*/}
+                                            {/*{item.icon && <Icon type={item.icon}/>}*/}
+                                            {/*<span>{item.title}</span>*/}
+                                        {/*</Fragment>*/}
+                                    {/*}*/}
+                                {/*</Breadcrumb.Item>)*/}
+                        {/*})}*/}
+                    {/*</Breadcrumb>*/}
                     <Content
                         style={{
-                            position: 'relative', margin: '0 16px', padding: 24, background: '#fff', minHeight: 280
+                            position: 'relative',  minHeight: 280
                         }}>
                         <Routes rootStore={this.props.rootStore}/>
                     </Content>
-                    <Footer style={{textAlign: 'center'}}>
-                        {Config.copyright}
-                    </Footer>
                 </Layout>
             </Layout>
         )

@@ -70,7 +70,7 @@ class App extends React.Component {
               {/* 路由 react-route-dom 使用参考：https://juejin.im/post/5a7e9ee7f265da4e7832949c */}
             <Router>
               <Switch>
-                <Route exact path='/' render={() => <Redirect to={`${config.adminBasePath}/dashboard`} push/>}/>
+                <Route exact path='/' render={() => <Redirect to={`${config.adminBasePath}/order`} push/>}/>
                 <Route path='/login' component={Login}/>
                 <Route path={config.adminBasePath} component={Main}/>
                 <Route component={NotFound}/>
