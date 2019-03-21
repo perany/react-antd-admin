@@ -74,9 +74,9 @@ class Order extends Component {
                                 rules: [{required: false}],
                                 initialValue:'s0'
                             })(
-                                <Select placeholder={"请选择"} style={{width: 250}} onChange={this.statusSelectChange}>
+                                <Select mode={"multiple"} placeholder={"请选择"} style={{width: 250}} onChange={this.statusSelectChange}>
                                     <Option value="s0">状态1</Option>
-                                    <Option value="s1" disabled>状态2</Option>
+                                    <Option value="s1">状态2</Option>
                                 </Select>
                             )}
                         </Form.Item>
@@ -85,20 +85,24 @@ class Order extends Component {
                                 rules: [{required: false}],
                                 initialValue:'t0'
                             })(
-                                <Select placeholder={"请选择"} style={{width: 250}} onChange={this.typeSelectChange}>
+                                <Select mode={"multiple"} placeholder={"请选择"} style={{width: 250}} onChange={this.typeSelectChange}>
                                     <Option value="t0">请选择</Option>
                                     <Option value="t1">类型1</Option>
                                     <Option value="t2">类型2</Option>
+                                    <Option value="t3">类型3</Option>
+                                    <Option value="t4">类型4</Option>
+                                    <Option value="t5">类型5</Option>
+                                    <Option value="t6">类型6</Option>
                                 </Select>
                             )}
                         </Form.Item>
                         <Form.Item>
-                            <Button type="primary" htmlType="submit">
+                            <Button className={styles.submit} htmlType="submit">
                                 查询
                             </Button>
                         </Form.Item>
                         <Form.Item>
-                            <Button onClick={resetFields}>
+                            <Button className={styles.reset} onClick={resetFields}>
                                 重置
                             </Button>
                         </Form.Item>
