@@ -70,8 +70,15 @@ class HeaderCustom extends Component {
                             key='avatar'
                             title={
                                 <Fragment>
-                                    <IconFont type="iconUSERtouxiangx" style={{'background':'#fff','color':'#fff','borderRadius':'0.17rem','fontSize':'0.34rem'}}/>
-                                    <span style={{'color':'#fff'}}>{this.props.user.realName}</span>
+                                    <IconFont type="iconUSERtouxiangx" style={{
+                                        'background': '#fff',
+                                        'color': '#fff',
+                                        'borderRadius': '0.17rem',
+                                        'fontSize': '0.34rem',
+                                        'position': 'relative',
+                                        'top': '8px'
+                                    }}/>
+                                    <span style={{'color': '#fff'}}>{this.props.user.realName}</span>
                                 </Fragment>}
                         >
                             <Menu.Item key='info' style={{'height': 'auto', 'top': '-5px'}}>
