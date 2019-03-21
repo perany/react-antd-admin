@@ -36,19 +36,19 @@ class HeaderCustom extends Component {
         });
         const labelStyle = {
             'height': '0.2rem',
-            'font-size': '0.12rem',
-            'font-weight': '400',
+            'fontSize': '0.12rem',
+            'fontWeight': '400',
             'color': 'rgba(153,153,153,1)',
-            'line-height': '0.2rem',
-            'margin-top': '0.15rem'
+            'lineHeight': '0.2rem',
+            'marginTop': '0.15rem'
         }
         const valueStyle = {
             'height': '0.22rem',
-            'font-size': '0.14rem',
-            'font-weight': '500',
+            'fontSize': '0.14rem',
+            'fontWeight': '500',
             'color': 'rgba(64,64,64,1)',
-            'line-height': '0.22rem',
-            'margin-bottom': '0.05rem'
+            'lineHeight': '0.22rem',
+            'marginBottom': '0.05rem'
         }
         return (
             <Header className={styles.header}>
@@ -70,7 +70,7 @@ class HeaderCustom extends Component {
                             key='avatar'
                             title={
                                 <Fragment>
-                                    <IconFont type="iconUSERtouxiangx" style={{'background':'#fff','color':'#fff','border-radius':'0.17rem','font-size':'0.34rem'}}/>
+                                    <IconFont type="iconUSERtouxiangx" style={{'background':'#fff','color':'#fff','borderRadius':'0.17rem','fontSize':'0.34rem'}}/>
                                     <span style={{'color':'#fff'}}>{this.props.user.realName}</span>
                                 </Fragment>}
                         >

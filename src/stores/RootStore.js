@@ -5,6 +5,7 @@ const LOCALE = 'ROOTSTORE_LOCALE'
 
 class RootStore {
   @observable locale = 'en'
+  @observable userid = 'user001'
 
   @action loadLocale() {
     const dataStr = localStorage.getItem(LOCALE)

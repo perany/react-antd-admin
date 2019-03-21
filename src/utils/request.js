@@ -5,7 +5,7 @@ import {message} from 'antd'
 const axiosRequest = axios.create()
 
 const getUrl = (url, mock) => {
-    return mock ? `/${url}` : `/api/${url}`
+    return mock ? `/local/${url}` : `/${url}`
 }
 
 let reqQueue = 0
@@ -17,6 +17,8 @@ axiosRequest.interceptors.request.use(config => {
     }
     config.url = getUrl(config.url, config['mock'])
     config.headers['Authorization'] = ''
+    config.headers['Accept'] = 'application/json'
+    console.log("request data----->    ",config.data)
     return config
 }, error => {
     if (error.config['loading']) {
@@ -31,7 +33,7 @@ axiosRequest.interceptors.response.use(response => {
         reqQueue -= 1
         reqQueue === 0 && loading.hide()
     }
-    if (response.data.code !== 0) {
+    if (response.data.ret !== 0) {
         message.error(response.data.message)
     }
     return Promise.resolve(response.data)
@@ -45,10 +47,12 @@ axiosRequest.interceptors.response.use(response => {
 
 export default {
     get(url, config) {
+        console.log(config)
         return axiosRequest({
             url,
             method: 'GET',
             loading: false,
+            params:config.data,
             ...config
         })
     },
