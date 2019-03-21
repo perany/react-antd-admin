@@ -113,8 +113,8 @@ class Order extends Component {
                                 rules: [{required: false}],
                             })(
                                 <Select placeholder={"请选择"} style={{width: 250}}>
-                                    <Option value="s0">状态1</Option>
-                                    <Option value="s1">状态2</Option>
+                                    <Option value="0">待处理</Option>
+                                    <Option value="1">已处理</Option>
                                 </Select>
                             )}
                         </Form.Item>

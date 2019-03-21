@@ -43,7 +43,7 @@ class OrderList extends Component {
                 render: tags => {
                     // console.log("tag", tags)
                     return <div
-                        className={tags === '1' ? styles.done : styles.todo}>{tags === '1' ? '处理完成' : '待处理'}</div>;
+                        className={tags === 1 ? styles.done : styles.todo}>{tags === 1 ? '处理完成' : '待处理'}</div>;
                 }
             }, {
                 title: '处理人',
