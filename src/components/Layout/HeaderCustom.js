@@ -1,14 +1,14 @@
 import React, {Component, Fragment} from 'react'
-import {Avatar, Button, Form, Icon, Input, Layout, Menu, Modal, Row, Select} from 'antd'
+import {Avatar, Icon, Layout, Menu} from 'antd'
 import PropTypes from 'prop-types'
 import {inject} from 'mobx-react'
 import {FormattedMessage} from 'react-intl'
 import styles from './HeaderCustom.module.less'
+import ChangePwd from "../ChangePwd/ChangePwd";
 
-const {Header} = Layout
+const {Header} = Layout;
 
 @inject('rootStore')
-@Form.create({name: 'changepwd'})
 class HeaderCustom extends Component {
     static propTypes = {
         user: PropTypes.object,
@@ -17,65 +17,39 @@ class HeaderCustom extends Component {
         onSignOut: PropTypes.func
     }
 
-    state = { visible: false }
+    state = {visible: false};
 
-    handleClickMenu = (e) => {
+    // 退出登录
+    handleLogout = (e) => {
         e.key === 'SignOut' && this.props.onSignOut()
-    }
+    };
 
+    //切换语种
     changeLocale = (e) => {
-        const {rootStore} = this.props
+        const {rootStore} = this.props;
         rootStore.changeLocale(e.key)
-    }
+    };
 
-    // 修改密码弹窗
+    // 弹窗 切换可见
+    onVisible = (status) => {
+        this.setState({
+            visible: status
+        });
+    };
+
+    // 弹窗 显示
     showModal = ()=>{
         this.setState({
-            visible: true,
+            visible: true
         });
-    }
-
-    handleOk = (e) => {
-        this.setState({
-            visible: false,
-        });
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                console.log('Received values of form: ', values);
-            }
-            console.log("submit -->", values);
-            // let params = {
-            //     user_id: values.uid,
-            //
-            // };
-            // Api.orderList(params).then(res => {
-            //     if (res.ret === 0) {
-            //         this.setState({
-            //             list: res.data.list,
-            //             pageSize: res.data.per_page,
-            //             total: res.data.total
-            //         });
-            //         console.log("---->res ", res, this.state)
-            //     }
-            // });
-
-        })
-    }
-
-    handleCancel = (e) => {
-        console.log(e);
-        this.setState({
-            visible: false,
-        });
-    }
+    };
 
     render() {
-        const {languages} = Config.i18n
-        const {rootStore} = this.props
-        const {getFieldDecorator, resetFields} = this.props.form;
+        const {languages} = Config.i18n;
+        const {rootStore} = this.props;
         const currentLanguage = languages.find(
             item => item.key === rootStore.locale
-        )
+        );
         const IconFont = Icon.createFromIconfontCN({
             scriptUrl: '//at.alicdn.com/t/font_1097054_l6xeatzamh.js',
         });
@@ -86,7 +60,7 @@ class HeaderCustom extends Component {
             'color': 'rgba(153,153,153,1)',
             'lineHeight': '0.2rem',
             'marginTop': '0.15rem'
-        }
+        };
         const valueStyle = {
             'height': '0.22rem',
             'fontSize': '0.14rem',
@@ -94,7 +68,7 @@ class HeaderCustom extends Component {
             'color': 'rgba(64,64,64,1)',
             'lineHeight': '0.22rem',
             'marginBottom': '0.05rem'
-        }
+        };
         return (
             <Header className={styles.header}>
                 <div
@@ -109,7 +83,7 @@ class HeaderCustom extends Component {
                     <Menu
                         mode='horizontal'
                         theme='light'
-                        onClick={this.handleClickMenu}
+                        onClick={this.handleLogout}
                     >
                         <Menu.SubMenu
                             key='avatar'
@@ -135,7 +109,7 @@ class HeaderCustom extends Component {
                                 <div style={valueStyle}>{this.props.user.role}</div>
                             </Menu.Item>
                             <Menu.Divider/>
-                            <Menu.Item key='changePwd' onClick={this.showModal}>
+                            <Menu.Item key='changePass' onClick={this.showModal}>
                                 <IconFont type="iconxiugaimimax"/>
                                 <FormattedMessage id='intl.changePwd'/>
                             </Menu.Item>
@@ -165,45 +139,10 @@ class HeaderCustom extends Component {
                         </Menu.SubMenu>
                     </Menu>
                 </div>
-                <Modal
-                    title="修改密码"
-                    width={"3.7rem"}
+                <ChangePwd
                     visible={this.state.visible}
-                    cancelText={"取消"}
-                    okText={"提交"}
-                    onOk={this.handleOk}
-                    onCancel={this.handleCancel}
-                    wrapClassName={"changePwd"}
-                >
-                    <Form onSubmit={(e) => {
-                        e.preventDefault();
-                    }}>
-                        <Form.Item label="用户名：">
-                            {rootStore.userInfo.name}
-                        </Form.Item>
-                            <Form.Item label="原密码：">
-                                {getFieldDecorator('oldPwd', {
-                                    rules: [{required: false}],
-                                })(
-                                    <Input placeholder="请输入原密码"/>
-                                )}
-                            </Form.Item>
-                            <Form.Item label="新密码：">
-                                {getFieldDecorator('newPwd', {
-                                    rules: [{required: false}],
-                                })(
-                                    <Input type="password" placeholder="请输入新密码"/>
-                                )}
-                            </Form.Item>
-                            <Form.Item label="新密码：">
-                                {getFieldDecorator('confirmPwd', {
-                                    rules: [{required: false}],
-                                })(
-                                    <Input type="password" placeholder="请再次输入新密码"/>
-                                )}
-                            </Form.Item>
-                    </Form>
-                </Modal>
+                    onchange={this.onVisible}
+                />
             </Header>
         )
     }
