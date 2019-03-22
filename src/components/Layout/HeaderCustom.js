@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react'
-import {Avatar, Icon, Layout, Menu} from 'antd'
+import {Avatar, Button, Form, Icon, Input, Layout, Menu, Modal, Row, Select} from 'antd'
 import PropTypes from 'prop-types'
 import {inject} from 'mobx-react'
 import {FormattedMessage} from 'react-intl'
@@ -8,6 +8,7 @@ import styles from './HeaderCustom.module.less'
 const {Header} = Layout
 
 @inject('rootStore')
+@Form.create({name: 'changepwd'})
 class HeaderCustom extends Component {
     static propTypes = {
         user: PropTypes.object,
@@ -15,6 +16,8 @@ class HeaderCustom extends Component {
         onCollapseChange: PropTypes.func,
         onSignOut: PropTypes.func
     }
+
+    state = { visible: false }
 
     handleClickMenu = (e) => {
         e.key === 'SignOut' && this.props.onSignOut()
@@ -25,9 +28,51 @@ class HeaderCustom extends Component {
         rootStore.changeLocale(e.key)
     }
 
+    // 修改密码弹窗
+    showModal = ()=>{
+        this.setState({
+            visible: true,
+        });
+    }
+
+    handleOk = (e) => {
+        this.setState({
+            visible: false,
+        });
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+            }
+            console.log("submit -->", values);
+            // let params = {
+            //     user_id: values.uid,
+            //
+            // };
+            // Api.orderList(params).then(res => {
+            //     if (res.ret === 0) {
+            //         this.setState({
+            //             list: res.data.list,
+            //             pageSize: res.data.per_page,
+            //             total: res.data.total
+            //         });
+            //         console.log("---->res ", res, this.state)
+            //     }
+            // });
+
+        })
+    }
+
+    handleCancel = (e) => {
+        console.log(e);
+        this.setState({
+            visible: false,
+        });
+    }
+
     render() {
         const {languages} = Config.i18n
         const {rootStore} = this.props
+        const {getFieldDecorator, resetFields} = this.props.form;
         const currentLanguage = languages.find(
             item => item.key === rootStore.locale
         )
@@ -90,7 +135,7 @@ class HeaderCustom extends Component {
                                 <div style={valueStyle}>{this.props.user.role}</div>
                             </Menu.Item>
                             <Menu.Divider/>
-                            <Menu.Item key='changePwd'>
+                            <Menu.Item key='changePwd' onClick={this.showModal}>
                                 <IconFont type="iconxiugaimimax"/>
                                 <FormattedMessage id='intl.changePwd'/>
                             </Menu.Item>
@@ -120,6 +165,45 @@ class HeaderCustom extends Component {
                         </Menu.SubMenu>
                     </Menu>
                 </div>
+                <Modal
+                    title="修改密码"
+                    width={"3.7rem"}
+                    visible={this.state.visible}
+                    cancelText={"取消"}
+                    okText={"提交"}
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                    wrapClassName={"changePwd"}
+                >
+                    <Form onSubmit={(e) => {
+                        e.preventDefault();
+                    }}>
+                        <Form.Item label="用户名：">
+                            {rootStore.userInfo.name}
+                        </Form.Item>
+                            <Form.Item label="原密码：">
+                                {getFieldDecorator('oldPwd', {
+                                    rules: [{required: false}],
+                                })(
+                                    <Input placeholder="请输入原密码"/>
+                                )}
+                            </Form.Item>
+                            <Form.Item label="新密码：">
+                                {getFieldDecorator('newPwd', {
+                                    rules: [{required: false}],
+                                })(
+                                    <Input type="password" placeholder="请输入新密码"/>
+                                )}
+                            </Form.Item>
+                            <Form.Item label="新密码：">
+                                {getFieldDecorator('confirmPwd', {
+                                    rules: [{required: false}],
+                                })(
+                                    <Input type="password" placeholder="请再次输入新密码"/>
+                                )}
+                            </Form.Item>
+                    </Form>
+                </Modal>
             </Header>
         )
     }
