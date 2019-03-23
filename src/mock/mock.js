@@ -136,3 +136,84 @@ Mock.mock('/local/cs/feedback/list', 'post', (req) => {
 
 })
 
+Mock.mock('/local/cs/quick-type/list', 'get', (req) => {
+    if(JSON.parse(req.body).page==1){
+        return {
+            "ret": 0,
+            "msg": "success",
+            "data": {
+                "list": [
+                    {
+                        "id": 1,
+                        "feedback_type": 1,
+                        "title": "测试",
+                        "content": "测试回复111",
+                        "enabled": 1,
+                        "created_at": 1552982331,
+                        "updated_at": 1552982384,
+                        "updated_by": ""
+                    },
+                    {
+                        "id": 2,
+                        "feedback_type": 1,
+                        "title": "测试",
+                        "content": "测试回复1222",
+                        "enabled": 1,
+                        "created_at": 1552982331,
+                        "updated_at": 1552982384,
+                        "updated_by": ""
+                    },
+                    {
+                        "id": 3,
+                        "feedback_type": 1,
+                        "title": "测试",
+                        "content": "测试回复1333",
+                        "enabled": 1,
+                        "created_at": 1552982331,
+                        "updated_at": 1552982384,
+                        "updated_by": ""
+                    },
+                ],
+                "total": 5,
+                "current_page": 1,
+                "last_page": 2,
+                "per_page": 3
+            }
+        }
+    }else{
+        return {
+            "ret": 0,
+            "msg": "success",
+            "data": {
+                "list": [
+                    {
+                        "id": 4,
+                        "feedback_type": 1,
+                        "title": "测试",
+                        "content": "测试回复44444",
+                        "enabled": 1,
+                        "created_at": 1552982331,
+                        "updated_at": 1552982384,
+                        "updated_by": ""
+                    },
+                    {
+                        "id": 5,
+                        "feedback_type": 1,
+                        "title": "测试",
+                        "content": "测试回复55555",
+                        "enabled": 1,
+                        "created_at": 1552982331,
+                        "updated_at": 1552982384,
+                        "updated_by": ""
+                    }
+                ],
+                "total": 5,
+                "current_page": 2,
+                "last_page": 2,
+                "per_page": 3
+            }
+        }
+    }
+
+})
+

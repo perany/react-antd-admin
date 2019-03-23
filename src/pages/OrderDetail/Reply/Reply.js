@@ -87,7 +87,7 @@ class Reply extends Component {
             <div className={styles.reply}>
                 <div className={styles.fastCon}>
                     <div className={styles.fastBtn} id="replayBtn" onClick={this.fastBtnClick}>
-                        <IconFont type={"\ue64a"} style={btnIconStyle}/>
+                        <IconFont type={"\ue645"} style={btnIconStyle}/>
                         <span>快捷回复</span>
                         <IconFont type={"\ue63b"} style={btnIconStyle}/>
                     </div>

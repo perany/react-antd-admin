@@ -1,6 +1,6 @@
 import request from '../utils/request'
 
-require('./mock')
+require('../mock/mock')
 
 export default {
     login: (data, config) => request.post('login', {data, ...config}),

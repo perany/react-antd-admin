@@ -1,0 +1,79 @@
+.table{
+  width:calc(100% - 0.4rem);
+  min-height:7.54rem;
+  margin: 0.2rem;
+  background:rgba(255,255,255,1);
+  box-shadow:0rem 0.01rem 0.06rem 0rem rgba(211,211,211,0.6);
+  color: #404040;
+
+  input[type='text']{
+    width: 0.5rem;
+  }
+
+  a{
+    color: #667B99;
+  }
+
+  .done{
+    width:0.74rem;
+    height:0.22rem;
+    background:rgba(30,206,79,0.05);
+    border-radius:0.11rem;
+    border:0.01rem solid rgba(30,206,79,1);
+    font-size:0.13rem;
+    font-weight:400;
+    color:rgba(30,206,79,1);
+    line-height:0.18rem;
+    text-align: center;
+  }
+
+  .todo{
+    width:0.6rem;
+    height:0.22rem;
+    background:rgba(128,128,128,0.05);
+    border-radius:0.11rem;
+    border:0.01rem solid rgba(128,128,128,1);
+    font-size:0.13rem;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(128,128,128,1);
+    line-height:0.18rem;
+    text-align: center;
+  }
+
+  :global{
+    .ant-table-thead > tr > th{
+      background-color: #fff;
+    }
+
+    .ant-table-tbody > tr>td{
+      height: 0.5rem;
+      line-height: 0.5rem;
+      padding: 0 0.15rem;
+      border-color: #ededed;
+    }
+
+    .ant-table-tbody > tr:nth-child(odd){
+      background-color:rgba(247,249,250,1);
+    }
+
+    .ant-table-pagination.ant-pagination{
+      float: none;
+      width: 100%;
+      text-align: right;
+      padding: 0 0.2rem;
+    }
+
+    .ant-pagination-item{
+      float: none;
+    }
+
+    .ant-pagination-total-text{
+      float: left;
+    }
+
+    .ant-pagination-prev .ant-pagination-item-link, .ant-pagination-next .ant-pagination-item-link{
+      border-radius: 0.02rem;
+    }
+  }
+}
