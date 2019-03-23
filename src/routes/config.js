@@ -38,7 +38,7 @@ const componentMenuConfig = [
         title: 'Order',
         root: true,
         zhTitle: '工单处理',
-        icon: '\ue61e',
+        icon: '\ue649',
         component: componentObj['Order']
     },
     {
@@ -46,7 +46,7 @@ const componentMenuConfig = [
         title: 'Users',
         root: true,
         zhTitle: '邮件处理',
-        icon: '\ue637',
+        icon: '\ue64c',
         component: componentObj['Users']
     },
     {
@@ -54,7 +54,7 @@ const componentMenuConfig = [
         title: 'details',
         root: false,
         zhTitle: '工单详情',
-        icon: '\ue61e',
+        icon: '\ue649',
         component: componentObj['OrderDetail']
     },
     // {

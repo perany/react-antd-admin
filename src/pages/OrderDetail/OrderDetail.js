@@ -4,6 +4,7 @@ import styles from './OrderDetail.module.less'
 import Back from './../../components/Back/Back'
 import Title from "../../components/Title/Title";
 import moment from "moment";
+import Reply from "./Reply/Reply";
 
 
 class OrderDetail extends Component {
@@ -14,19 +15,19 @@ class OrderDetail extends Component {
     }
 
     state = {
-        id: '0',
-        title: '为什么登录不上去啊在线等，挺急的！',
-        email: 'korea muscle man@gmail.com',
-        contact: '01055929231',
-        feedbackTime: '1551697568',
-        uid: '01055929231',
-        type: 0,
-        app: '阿拉德之怒',
-        status: 1,
-        description: '你好，我是王者传奇韩国89区的玩家，我叫阿卜杜勒麦麦提拉格朗日，我的游戏名叫做三国传奇赛高，我在2019年2月21日 下午14.32分无法登录游戏，系统提示我账号没了，请问是怎么回事，我用的是三星盖乐世8，系统版miui 15.5，请回复谢谢，附件是截图你好，我是王者传奇韩国89区的玩家，我叫阿卜杜勒麦麦提拉格朗日，我的游戏名叫做三国传奇赛高，我在2019年2月21日 下午14.32分无法登录游戏，系统提示我账号没了，请问是怎么回事，我用的是三星盖乐世8，系统版miui 15.5，请回复谢谢，附件是截图你好，我是王者传奇韩国89区的玩家，我叫阿卜杜勒麦麦提拉格朗日，我的游戏名叫做三国传奇赛高，我在2019年2月21日 下午14.32分无法登录游戏，系统提示我账号没了，请问是怎么回事，我用的是三星盖乐世8，系统版miui 15.5，请回复谢谢，附件是截图',
-        resolver: '真实姓名',
-        resolveTime: '1551697568',
-        resolveDesc: '你好，我是王者传奇韩国89区的玩家，我叫阿卜杜勒麦麦提拉格朗日，我的游戏名叫做三国传奇赛高，我在2019年2月21日 下午14.32分无法登录游戏，系统提示我账号没了，请问是怎么回事，我用的是三星盖乐世8，系统版miui 15.5，请回复谢谢，附件是截图你好，我是王者传奇韩国89区的玩家，我叫阿卜杜勒麦麦提拉格朗日，我的游戏名叫做三国传奇赛高，我在2019年2月21日 下午14.32分无法登录游戏，系统提示我账号没了，请问是怎么回事，我用的是三星盖乐世8，系统版miui 15.5，请回复谢谢，附件是截图你好，我是王者传奇韩国89区的玩家，我叫阿卜杜勒麦麦提拉格朗日，我的游戏名叫做三国传奇赛高，我在2019年2月21日 下午14.32分无法登录游戏，系统提示我账号没了，请问是怎么回事，我用的是三星盖乐世8，系统版miui 15.5，请回复谢谢，附件是截图'
+        id: '',
+        title: '',
+        email: '',
+        contact: '',
+        feedbackTime: '',
+        uid: '',
+        type: null,
+        app: '',
+        status: 0,
+        description: '',
+        resolver: '',
+        resolveTime: '',
+        resolveDesc: ''
     }
 
     componentDidMount() {
@@ -39,8 +40,8 @@ class OrderDetail extends Component {
 
     getOrderInfo = async () => {
         const {params} = this.props.match;
-        Api.orderDetail({id:params.id}).then((res)=>{
-            if(res.data){
+        Api.orderDetail({id: params.id}).then((res) => {
+            if (res.data) {
                 this.setState({
                     id: res.data.id,
                     title: res.data.title,
@@ -58,6 +59,20 @@ class OrderDetail extends Component {
                 });
             }
         });
+    }
+
+    renderSolvedReply = () => {
+        return (<div className={styles.feedbackCon}>
+            <Row>
+                <span>处理人：{this.state.resolver}</span>
+            </Row>
+            <Row>
+                <span>处理时间：{moment(parseInt(this.state.resolveTime)).format('YYYY-MM-DD hh:mm:ss')}</span>
+            </Row>
+            <Row>
+                {this.state.resolveDesc}
+            </Row>
+        </div>)
     }
 
     render() {
@@ -91,17 +106,7 @@ class OrderDetail extends Component {
                 </div>
                 <div className={styles.con}>
                     <Title title={"客服回复"}/>
-                    <div className={styles.feedbackCon}>
-                        <Row>
-                            <span>处理人：{this.state.resolver}</span>
-                        </Row>
-                        <Row>
-                            <span>处理时间：{moment(parseInt(this.state.resolveTime)).format('YYYY-MM-DD hh:mm:ss')}</span>
-                        </Row>
-                        <Row>
-                            {this.state.resolveDesc}
-                        </Row>
-                    </div>
+                    {this.state.status === 1 ? this.renderSolvedReply() : <Reply id={this.state.id}/>}
                 </div>
             </div>
         )

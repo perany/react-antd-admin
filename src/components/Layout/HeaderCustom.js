@@ -117,12 +117,12 @@ class HeaderCustom extends Component {
                             </Menu.Item>
                             <Menu.Divider/>
                             <Menu.Item key="changePass" onClick={this.showModal}>
-                                <IconFont type={"\ue633"} style={itemIconStyle}/>
+                                <IconFont type={"\ue652"} style={itemIconStyle}/>
                                 <FormattedMessage id="intl.changePwd"/>
                             </Menu.Item>
                             <Menu.Divider/>
                             <Menu.Item key="SignOut" style={{"color": "#FC5252"}}>
-                                <IconFont type={"\ue62f"} style={itemIconStyle}/>
+                                <IconFont type={"\ue653"} style={itemIconStyle}/>
                                 <FormattedMessage id="intl.signOut"/>
                             </Menu.Item>
                         </Menu.SubMenu>

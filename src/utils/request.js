@@ -18,7 +18,7 @@ axiosRequest.interceptors.request.use(config => {
     config.url = getUrl(config.url, config['mock'])
     config.headers['Authorization'] = ''
     config.headers['Accept'] = 'application/json'
-    console.log("request data----->    ",config.data)
+    // console.log("request data----->    ",config.data)
     return config
 }, error => {
     if (error.config['loading']) {
@@ -34,7 +34,7 @@ axiosRequest.interceptors.response.use(response => {
         reqQueue === 0 && loading.hide()
     }
     if (response.data.ret !== 0) {
-        message.error(response.data.message)
+        message.error(response.data.msg)
     }
     return Promise.resolve(response.data)
 }, error => {
