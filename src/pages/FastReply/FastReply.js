@@ -68,6 +68,11 @@ class FastReply extends Component {
         this.pageChange(pageSize, pageNow)
     }
 
+    // 新增 点击
+    addReply = e => {
+
+    }
+
     render() {
         const Option = Select.Option;
         const {getFieldDecorator, resetFields} = this.props.form;
@@ -113,6 +118,7 @@ class FastReply extends Component {
                         </Form.Item>
                     </Row>
                 </Form>
+                <Button type="primary" className={styles.add} onClick={this.addReply}>+ 新增</Button>
                 <ReplyList {...this.state} pageChange={this.pageChange}/>
             </div>
         )
