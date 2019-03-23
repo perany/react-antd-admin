@@ -16,7 +16,6 @@ class SiderCustom extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        console.log('******getDerivedStateFromProps', props, state)
         if (props.collapsed !== state.collapsed || props.location.pathname !== SiderCustom.pathname) {
             SiderCustom.pathname = props.location.pathname
             return {
@@ -45,7 +44,6 @@ class SiderCustom extends Component {
     }
 
     componentDidMount() {
-        console.log('******componentDidMount', this.props, this.state)
         SiderCustom.openKey = [this.props.location.parentKey] || []
         SiderCustom.pathname = this.props.location.pathname
         const state = SiderCustom.setMenuOpen(this.props)
@@ -116,15 +114,16 @@ class SiderCustom extends Component {
                 className={styles.sideBar}
             >
                 <Row type={"flex"} className={styles.logo}>
-                    <div className={styles.titleIcon}/>{config.siteName}
-                    </Row>
+                    <div className={styles.titleIcon}/>
+                    {config.siteName}
+                </Row>
                 <Menu mode='inline'
                       inlineCollapsed={this.props.collapsed}
                       selectedKeys={[this.state.selectedKey]}
                       openKeys={this.state.openKey}
                       onClick={this.menuClick}
                       onOpenChange={this.openMenu}>
-                    {routes.map(r => r.component ? this.renderMenuItem(r) : this.renderSubMenu(r))}
+                    {routes.map(r => r.showMenu && (r.component ? this.renderMenuItem(r) : this.renderSubMenu(r)))}
                 </Menu>
             </Layout.Sider>
         )
