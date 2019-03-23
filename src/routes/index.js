@@ -21,7 +21,8 @@ class Routes extends Component {
           props.location.searchParams = qs.parse(search)
           props.rootStore = this.props.rootStore
           return <r.component {...props}/>
-        }}/>
+        }}
+      />
       :
       <Redirect
         key={r.key}

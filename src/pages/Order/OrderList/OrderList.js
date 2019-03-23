@@ -59,7 +59,7 @@ class OrderList extends Component {
                 key: 'detail',
                 render: tags => {
                     // console.log("link", tags);
-                    return <Link to={`/app/orderDetail/${tags}`}> {'详情'}</Link>;
+                    return <Link to={`/app/order/detail/${tags}`}> {'详情'}</Link>;
                 }
             }
         ]

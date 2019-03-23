@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
 import {Link, withRouter} from 'react-router-dom'
-import {Icon, Layout, Menu, Row} from 'antd'
+import {Layout, Menu, Row} from 'antd'
 import PropTypes from 'prop-types'
 import routes from '../../routes/config'
 import {inject} from 'mobx-react'
 import styles from './SiderCustom.module.less'
 import config from './../../utils/config'
+import IconFont from '../../components/IconFont/IconFont'
 
 @inject('rootStore')
 class SiderCustom extends Component {
@@ -27,10 +28,8 @@ class SiderCustom extends Component {
     }
 
     static setMenuOpen = (props) => {
-        const {pathname} = props.location
         return {
             openKey: props.collapsed ? [] : SiderCustom.openKey,
-            selectedKey: pathname
         }
     }
 
@@ -39,8 +38,14 @@ class SiderCustom extends Component {
 
     state = {
         openKey: [],
-        selectedKey: '',
         collapsed: true
+    }
+
+    iconStyle = {
+        width: '0.2rem',
+        display: 'inline-block',
+        marginRight: '0.2rem',
+        textAlign: 'center'
     }
 
     componentDidMount() {
@@ -48,13 +53,6 @@ class SiderCustom extends Component {
         SiderCustom.pathname = this.props.location.pathname
         const state = SiderCustom.setMenuOpen(this.props)
         this.setState(state)
-    }
-
-    menuClick = e => {
-        console.log(e, this.state, this.props)
-        this.setState({
-            selectedKey: e.key
-        })
     }
 
     openMenu = v => {
@@ -65,30 +63,30 @@ class SiderCustom extends Component {
     }
 
     renderMenuItem = item => {
-        const {rootStore} = this.props
-        const title = rootStore.locale !== 'en' ? item[rootStore.locale + 'Title'] || item.title : item.title
+        const {rootStore} = this.props;
+        const title = rootStore.locale !== 'en' ? item[rootStore.locale + 'Title'] || item.title : item.title;
         return (
             <Menu.Item
                 key={item.key}
             >
                 <Link to={(item.path || item.key) + (item.query || '')}>
-                    {item.icon && <Icon type={item.icon}/>}
-                    <span className='nav-item'>{title}</span>
+                    {item.icon && <IconFont type={item.icon} style={this.iconStyle}/>}
+                    <span className={styles.navItem}>{title}</span>
                 </Link>
             </Menu.Item>
         )
     }
 
     renderSubMenu = item => {
-        const {rootStore} = this.props
-        const title = rootStore.locale !== 'en' ? item[rootStore.locale + 'Title'] || item.title : item.title
+        const {rootStore} = this.props;
+        const title = rootStore.locale !== 'en' ? item[rootStore.locale + 'Title'] || item.title : item.title;
         return (
             <Menu.SubMenu
                 key={item.key}
                 title={
                     <>
-                        {item.icon && <Icon type={item.icon}/>}
-                        <span className='nav-item'>{title}</span>
+                        {item.icon && <IconFont type={item.icon} style={this.iconStyle}/>}
+                        <span className={styles.navItem}>{title}</span>
                     </>
                 }>
                 {item.subs.map(item => this.renderMenuItem(item))}
@@ -96,13 +94,16 @@ class SiderCustom extends Component {
         )
     }
 
-    renderTrigger = (name) => {
-        return (
-            <div className={styles.trigger}>{name}</div>
-        )
-    }
-
     render() {
+        const {history} = this.props;
+        let selectedKeys = [];
+        let query = false;
+        routes.forEach((item) => {
+            if (history.location.pathname.indexOf(item.key) !== -1) {
+                selectedKeys.push(item.key);
+                query = true;
+            }
+        })
         return (
             <Layout.Sider
                 theme={"light"}
@@ -119,11 +120,10 @@ class SiderCustom extends Component {
                 </Row>
                 <Menu mode='inline'
                       inlineCollapsed={this.props.collapsed}
-                      selectedKeys={[this.state.selectedKey]}
+                      selectedKeys={query ? selectedKeys : ['/app']}
                       openKeys={this.state.openKey}
-                      onClick={this.menuClick}
                       onOpenChange={this.openMenu}>
-                    {routes.map(r => r.showMenu && (r.component ? this.renderMenuItem(r) : this.renderSubMenu(r)))}
+                    {routes.map(r => r.root && (r.component ? this.renderMenuItem(r) : this.renderSubMenu(r)))}
                 </Menu>
             </Layout.Sider>
         )

@@ -2,6 +2,10 @@ import React from 'react'
 import Loadable from 'react-loadable'
 import {Loader} from '../components'
 
+
+//组件懒加载
+let componentObj = {};
+
 const loading = (props) => {
     if (props.pastDelay) {
         return <Loader/>
@@ -9,29 +13,49 @@ const loading = (props) => {
     return null
 }
 
-const Users = Loadable({
-    loading,
-    loader: () => import('../pages/Users/Users')
-})
-const Order = Loadable({
-    loading,
-    loader: () => import('../pages/Order/Order')
-})
+const componentConfig = [{
+    name: 'Users',
+    path: 'Users/Users',
+}, {
+    name: 'Order',
+    path: 'Order/Order',
+},{
+    name: 'OrderDetail',
+    path: 'OrderDetail/OrderDetail',
+}];
 
-export default [
+componentConfig.forEach((item, i) => {
+    componentObj[item.name] = Loadable({
+        loading,
+        loader: () => import('../pages/' + item.path)
+    })
+});
+
+// 路由菜单配置
+const componentMenuConfig = [
     {
         key: '/app/order',
         title: 'Order',
+        root: true,
         zhTitle: '工单处理',
-        icon: 'Order',
-        component: Order
+        icon: '\ue61e',
+        component: componentObj['Order']
     },
     {
         key: '/app/user',
         title: 'Users',
+        root: true,
         zhTitle: '邮件处理',
-        icon: 'user',
-        component: Users
+        icon: '\ue637',
+        component: componentObj['Users']
+    },
+    {
+        key: '/app/order/detail/:id',
+        title: 'details',
+        root: false,
+        zhTitle: '工单详情',
+        icon: '\ue61e',
+        component: componentObj['OrderDetail']
     },
     // {
     //     key: '/app/user',
@@ -47,4 +71,6 @@ export default [
     //     icon: 'user',
     //     component: Users
     // }
-]
+];
+
+export default componentMenuConfig

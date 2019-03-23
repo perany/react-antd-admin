@@ -1,48 +1,52 @@
-.bg(@url){
+.bg(@url) {
   background-image: url(@url);
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
 }
 
-.sideBar{
+.sideBar {
   width: 2.2rem;
-  box-shadow:0rem 0.01rem 0.06rem 0rem rgba(211,211,211,0.6);
+  box-shadow: 0rem 0.01rem 0.06rem 0rem rgba(211, 211, 211, 0.6);
 
-  .logo{
-    width:2.2rem;
-    height:0.6rem;
-    background:rgba(102,123,153);
-    font-size:0.2rem;
-    font-weight:400;
-    color:rgba(255,255,255,1);
-    line-height:0.6rem;
+  .logo {
+    width: 2.2rem;
+    height: 0.6rem;
+    background: rgba(102, 123, 153);
+    font-size: 0.2rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 1);
+    line-height: 0.6rem;
 
-    .titleIcon{
-      width:0.3rem;
-      height:0.3rem;
+    .titleIcon {
+      width: 0.3rem;
+      height: 0.3rem;
       margin: 0.15rem 0.15rem 0.15rem 0.25rem;
       .bg("./../../assets/海外客服ICON@2x.png");
     }
+
+    .navItem{
+
+    }
   }
 
-  :global{
-    .ant-menu{
+  :global {
+    .ant-menu {
       color: #404040;
     }
-    .ant-menu-inline, .ant-menu-vertical, .ant-menu-vertical-left{
+    .ant-menu-inline, .ant-menu-vertical, .ant-menu-vertical-left {
       border-right: 0;
     }
-    .ant-menu-item-selected > a, .ant-menu-item-selected > a:hover,.ant-menu-item:hover, .ant-menu-item-active a, .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open, .ant-menu-submenu-active, .ant-menu-submenu-title:hover{
+    .ant-menu-item-selected > a, .ant-menu-item-selected > a:hover, .ant-menu-item:hover, .ant-menu-item-active a, .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open, .ant-menu-submenu-active, .ant-menu-submenu-title:hover {
       color: #FF751A;
     }
-    .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected,.ant-menu-item:active, .ant-menu-submenu-title:active{
-    background-color: rgba(255,117,26,0.1);
+    .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected, .ant-menu-item:active, .ant-menu-submenu-title:active {
+      background-color: rgba(255, 117, 26, 0.1);
     }
-    .ant-menu-vertical .ant-menu-item::after, .ant-menu-vertical-left .ant-menu-item::after, .ant-menu-vertical-right .ant-menu-item::after, .ant-menu-inline .ant-menu-item::after{
+    .ant-menu-vertical .ant-menu-item::after, .ant-menu-vertical-left .ant-menu-item::after, .ant-menu-vertical-right .ant-menu-item::after, .ant-menu-inline .ant-menu-item::after {
       border-right: none;
     }
-    .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected::before{
+    .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected::before {
       border-left: 2px solid #FF751A;
       position: absolute;
       top: 0;
@@ -52,7 +56,7 @@
       background-color: transparent;
       content: '';
     }
-    .ant-menu-inline-collapsed{
+    .ant-menu-inline-collapsed {
       width: 0.7rem;
     }
   }
