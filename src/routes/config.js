@@ -14,14 +14,20 @@ const loading = (props) => {
 }
 
 const componentConfig = [{
-    name: 'Users',
-    path: 'Users/Users',
+    name: 'Email',
+    path: 'Email/Email',
 }, {
     name: 'Order',
     path: 'Order/Order',
 },{
     name: 'OrderDetail',
     path: 'OrderDetail/OrderDetail',
+},{
+    name: 'FastReply',
+    path: 'FastReply/FastReply',
+},{
+    name: 'Account',
+    path: 'Account/Account',
 }];
 
 componentConfig.forEach((item, i) => {
@@ -47,7 +53,7 @@ const componentMenuConfig = [
         root: true,
         zhTitle: '邮件处理',
         icon: '\ue64c',
-        component: componentObj['Users']
+        component: componentObj['Email']
     },
     {
         key: '/app/order/detail/:id',
@@ -57,20 +63,22 @@ const componentMenuConfig = [
         icon: '\ue649',
         component: componentObj['OrderDetail']
     },
-    // {
-    //     key: '/app/user',
-    //     title: 'Users',
-    //     zhTitle: '快速回复设置',
-    //     icon: 'user',
-    //     component: Users
-    // },
-    // {
-    //     key: '/app/user',
-    //     title: 'Users',
-    //     zhTitle: '账户设置',
-    //     icon: 'user',
-    //     component: Users
-    // }
+    {
+        key: '/app/reply',
+        title: 'Users',
+        root: true,
+        zhTitle: '快速回复设置',
+        icon: '\ue64a',
+        component: componentObj['FastReply']
+    },
+    {
+        key: '/app/account',
+        title: 'Users',
+        root: true,
+        zhTitle: '账户设置',
+        icon: '\ue64b',
+        component: componentObj['Account']
+    }
 ];
 
 export default componentMenuConfig
