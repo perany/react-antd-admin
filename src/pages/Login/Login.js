@@ -23,7 +23,7 @@ class Login extends PureComponent {
                 console.log("login req::", res);
                 if (res.code === 0) {
                     setToken(res.token)
-                    this.props.history.replace('/app/dashboard')
+                    this.props.history.replace('/app/order')
                 }
             });
         })
