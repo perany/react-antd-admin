@@ -20,4 +20,6 @@ export default {
     fastReplyOptions: (data, config) => request.get('cs/quick-reply/all', {data, ...config}),
     // 获取快速回复列表
     fastReplyList: (data, config) => request.get('cs/quick-reply/list', {data, ...config}),
+    // 修改快速回复
+    updateFastReply: (data, config) => request.post('cs/quick-reply/update', {data, ...config}),
 }
