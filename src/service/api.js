@@ -12,6 +12,10 @@ export default {
     orderDetail: (data, config) => request.get('cs/feedback/info', {data, ...config}),
     // 工单回复
     reply: (data, config) => request.post('cs/feedback/reply', {data, ...config}),
+    // 获取用户信息
+    userInfo: (data, config) => request.get('cs/user/info', {data, ...config}),
+    // 获取应用信息
+    appInfo: (data, config) => request.get('cs/app/info', {data, ...config}),
     // 获取工单快速回复选项
     fastReplyOptions: (data, config) => request.get('cs/quick-reply/all', {data, ...config}),
     // 获取快速回复列表

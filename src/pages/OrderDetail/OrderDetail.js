@@ -5,14 +5,10 @@ import Back from './../../components/Back/Back'
 import Title from "../../components/Title/Title";
 import moment from "moment";
 import Reply from "./Reply/Reply";
+import {inject} from 'mobx-react'
 
-
+@inject("rootStore")
 class OrderDetail extends Component {
-
-    constructor(props) {
-        super(props);
-        console.log(1, this.props)
-    }
 
     state = {
         id: '',
@@ -22,7 +18,9 @@ class OrderDetail extends Component {
         feedbackTime: '',
         uid: '',
         type: null,
+        typeName: '',
         app: '',
+        appid: '',
         status: 0,
         description: '',
         resolver: '',
@@ -35,27 +33,59 @@ class OrderDetail extends Component {
         this.setState({
             id: this.props.match.params.id
         });
-        this.getOrderInfo();
+        this.getOrderInfo(true);
     }
 
-    getOrderInfo = async () => {
+    getOrderInfo = (fleshAll) => {
         const {params} = this.props.match;
         Api.orderDetail({id: params.id}).then((res) => {
             if (res.data) {
                 this.setState({
                     id: res.data.id,
                     title: res.data.title,
-                    email: 'korea muscle man@gmail.com',  //todo 邮箱账户 用户信息接口
                     contact: res.data.contact,
                     feedbackTime: res.data.created_at,
                     uid: res.data.user_id,
-                    type: res.data.type,    //todo 类型展示文字  全局遍历
-                    app: res.data.appid,    //todo 应用名称 应用信息接口
+                    type: res.data.type,
+                    appid: res.data.appid,
                     status: res.data.status,
                     description: res.data.description,
                     resolver: res.data.customer_service,
                     resolveTime: res.data.updated_at,
                     resolveDesc: res.data.reply
+                });
+                if(fleshAll){
+                    this.getUserInfo();
+                    this.getAppInfo();
+                    this.getTypeName();
+                }
+            }
+        });
+    }
+
+    getTypeName = () => {
+        this.props.rootStore.questionType.forEach((item) => {
+            if (item.id === this.state.type) {
+                this.setState({typeName: item.name});
+            }
+        })
+    }
+
+    getUserInfo = async () => {
+        Api.userInfo({user_id: this.state.uid}).then((res) => {
+            if (res.data) {
+                this.setState({
+                    email: res.data.email
+                });
+            }
+        });
+    }
+
+    getAppInfo = async () => {
+        Api.appInfo({appid: this.state.appid}).then((res) => {
+            if (res.data) {
+                this.setState({
+                    app: res.data.name
                 });
             }
         });
@@ -73,6 +103,10 @@ class OrderDetail extends Component {
                 {this.state.resolveDesc}
             </Row>
         </div>)
+    }
+
+    replySuccess = () => {
+        this.getOrderInfo(false);
     }
 
     render() {
@@ -106,7 +140,8 @@ class OrderDetail extends Component {
                 </div>
                 <div className={styles.con}>
                     <Title title={"客服回复"}/>
-                    {this.state.status === 1 ? this.renderSolvedReply() : <Reply id={this.state.id}/>}
+                    {this.state.status === 1 ? this.renderSolvedReply() :
+                        <Reply id={this.state.id} replySuccess={this.replySuccess}/>}
                 </div>
             </div>
         )

@@ -10,10 +10,8 @@ class Reply extends Component {
 
     constructor(props) {
         super(props)
-        console.log("sub props-->", this.props)
         this.state = {
             menuVisible: false,
-            textarea: '123456',
             options: []
         }
     }
@@ -56,12 +54,14 @@ class Reply extends Component {
 
     // 回复 点击
     applyClick = e => {
+        const {getFieldValue} = this.props.form;
         Api.reply({
             id: this.props.id,
-            reply: '123456'
+            reply: getFieldValue('textarea')
         }).then(res => {
             if (res.ret === 0) {
                 message.success("您已回复成功！");
+                this.props.replySuccess();
             }
         });
     }
