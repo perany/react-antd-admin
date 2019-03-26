@@ -1,7 +1,7 @@
 import React from 'react'
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom'
 import Loadable from 'react-loadable'
-import {IntlProvider, addLocaleData} from 'react-intl'
+import {addLocaleData, IntlProvider} from 'react-intl'
 import {LocaleProvider} from 'antd'
 import zh from 'react-intl/locale-data/zh'
 import en from 'react-intl/locale-data/en'
@@ -26,61 +26,74 @@ configure({enforceActions: 'always'})
 const loading = () => <Loader/>
 
 const Login = Loadable({
-  loading,
-  loader: () => import('./pages/Login/Login')
+    loading,
+    loader: () => import('./pages/Login/Login')
 })
 
 const Main = Loadable({
-  loading,
-  loader: () => import('./components/Layout/LayoutCustomer')
+    loading,
+    loader: () => import('./components/Layout/LayoutCustomer')
 })
 
 const NotFound = Loadable({
-  loading,
-  loader: () => import('./pages/Error/NotFound')
+    loading,
+    loader: () => import('./pages/Error/NotFound')
 })
 
 
 addLocaleData([...en, ...zh])
 
 const langMap = {
-  en: enUS,
-  zh: zhCN
+    en: enUS,
+    zh: zhCN
 }
 
 const antdLangMap = {
-  en: antdEnUS,
-  zh: antdZhCN
+    en: antdEnUS,
+    zh: antdZhCN
 }
 
 @observer
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-    rootStore.loadLocale()
-  }
+    constructor(props) {
+        super(props)
+        rootStore.loadLocale();
+    }
 
-  render() {
-    return (
-      <IntlProvider
-        locale={rootStore.locale}
-        messages={langMap[rootStore.locale]}>
-        <LocaleProvider locale={antdLangMap[rootStore.locale]}>
-          <Provider rootStore={rootStore}>
-              {/* 路由 react-route-dom 使用参考：https://juejin.im/post/5a7e9ee7f265da4e7832949c */}
-            <Router>
-              <Switch>
-                <Route exact path='/' render={() => <Redirect to={`${config.adminBasePath}/order`} push/>}/>
-                <Route path='/login' component={Login}/>
-                <Route path={config.adminBasePath} component={Main}/>
-                <Route component={NotFound}/>
-              </Switch>
-            </Router>
-          </Provider>
-        </LocaleProvider>
-      </IntlProvider>
-    )
-  }
+    componentDidMount(){
+        this.getQuestionType();
+    }
+
+    getQuestionType = () => {
+        Api.questionTypeList().then(res => {
+            if (res.ret === 0 && res.data.length > 0) {
+                rootStore.changeQuestionType(res.data);
+            }
+        });
+    }
+
+    render() {
+        return (
+            <IntlProvider
+                locale={rootStore.locale}
+                messages={langMap[rootStore.locale]}>
+                <LocaleProvider locale={antdLangMap[rootStore.locale]}>
+                    <Provider rootStore={rootStore}>
+                        {/* 路由 react-route-dom 使用参考：https://juejin.im/post/5a7e9ee7f265da4e7832949c */}
+                        <Router>
+                            <Switch>
+                                <Route exact path='/'
+                                       render={() => <Redirect to={`${config.adminBasePath}/order`} push/>}/>
+                                <Route path='/login' component={Login}/>
+                                <Route path={config.adminBasePath} component={Main}/>
+                                <Route component={NotFound}/>
+                            </Switch>
+                        </Router>
+                    </Provider>
+                </LocaleProvider>
+            </IntlProvider>
+        )
+    }
 }
 
 export default App

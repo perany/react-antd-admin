@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
-import {observer} from 'mobx-react'
-import {Button, Input, Menu, message} from 'antd';
+import {inject} from 'mobx-react'
+import {Button, Form, Input, Menu, message} from 'antd';
 import IconFont from '../../../components/IconFont/IconFont'
 import styles from './Reply.module.less'
 
-@observer
+@inject("rootStore")
+    @Form.create()
 class Reply extends Component {
 
     constructor(props) {
@@ -12,7 +13,8 @@ class Reply extends Component {
         console.log("sub props-->", this.props)
         this.state = {
             menuVisible: false,
-            value: '123456'
+            textarea: '123456',
+            options: []
         }
     }
 
@@ -43,6 +45,10 @@ class Reply extends Component {
 
     // 快捷回复列表 点击
     menuItemClick = e => {
+        const {setFieldsValue, getFieldValue} = this.props.form;
+        const oldVal = getFieldValue('textarea');
+        const addValue = e.key.substr(e.key.indexOf('_') + 1);
+        setFieldsValue({textarea: oldVal + addValue});
         this.setState({
             menuVisible: false
         });
@@ -63,7 +69,9 @@ class Reply extends Component {
     // 获取快捷回复 下拉选项
     getFastApplyOptions = () => {
         Api.fastReplyOptions({with_disabled: 0}).then(res => {
-
+            this.setState({
+                options: res.data ? res.data : []
+            });
         });
     }
 
@@ -83,6 +91,7 @@ class Reply extends Component {
         const SubMenu = Menu.SubMenu;
         const MenuItemGroup = Menu.ItemGroup;
         const {TextArea} = Input;
+        const {getFieldDecorator} = this.props.form;
         return (
             <div className={styles.reply}>
                 <div className={styles.fastCon}>
@@ -95,26 +104,27 @@ class Reply extends Component {
                           id="replayBtnDown"
                           style={btnOptionStyle}
                           mode="vertical">
-                        <SubMenu key="sub1" title={<span>Navigation One</span>}>
-                            <Menu.Item key="1">Option 1</Menu.Item>
-                            <Menu.Item key="2">Option 2</Menu.Item>
-                            <Menu.Item key="3">Option 3</Menu.Item>
-                            <Menu.Item key="4">Option 4</Menu.Item>
-                        </SubMenu>
-                        <SubMenu key="sub2" title={<span>Navigation Two</span>}>
-                            <Menu.Item key="5">Option 5</Menu.Item>
-                            <Menu.Item key="6">Option 6</Menu.Item>
-                        </SubMenu>
-                        <SubMenu key="sub4" title={<span>Navigation Three</span>}>
-                            <Menu.Item key="9">Option 9</Menu.Item>
-                            <Menu.Item key="10">Option 10</Menu.Item>
-                            <Menu.Item key="11">Option 11</Menu.Item>
-                            <Menu.Item key="12">Option 12</Menu.Item>
-                        </SubMenu>
+                        {
+                            this.props.rootStore.questionType.map((item) => (
+                                <SubMenu key={item.id} title={<span>{item.name}</span>}>
+                                    {this.state.options.map((subItem) => (
+                                        item.id === subItem['feedback_type'] &&
+                                        <Menu.Item key={subItem.id + "_" + subItem.content}>{subItem.title}</Menu.Item>
+                                    ))}
+                                </SubMenu>
+                            ))
+                        }
                     </Menu>
                 </div>
                 <div className={styles.inputCon}>
-                    <TextArea rows={12}/>
+                    <Form>
+                        {getFieldDecorator('textarea', {
+                            rules: [{required: true, message: '请输入回复内容！'}],
+                            initialValue: ''
+                        })(
+                            <TextArea rows={12}/>
+                        )}
+                    </Form>
                 </div>
                 <Button type="primary" onClick={this.applyClick}>回复</Button>
             </div>

@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
-import {observer} from 'mobx-react'
+import {inject, observer} from 'mobx-react'
 import styles from './Order.module.less'
 import {Button, Form, Input, Row, Select} from 'antd';
 import OrderList from './OrderList/OrderList'
 
 @observer
 @Form.create({name: 'order'})
+@inject('rootStore')
 
 class Order extends Component {
 
@@ -14,25 +15,12 @@ class Order extends Component {
         this.state = {
             list: [],
             pageSize: 15,
-            total: 0,
-            questionType: []
+            total: 0
         }
     }
 
     componentDidMount() {
         this.props.form.validateFields();
-        this.getQuetionType();
-    }
-
-    // 获取问题类型下拉列表
-    getQuetionType = () => {
-        Api.questionTypeList().then(res => {
-            if (res.ret === 0) {
-                this.setState({
-                    questionType: res.data
-                });
-            }
-        });
     }
 
     // 列表子组件分页
@@ -123,7 +111,7 @@ class Order extends Component {
                                 rules: [{required: false}],
                             })(
                                 <Select placeholder={"请选择"} style={{width: 250}}>
-                                    {this.state.questionType.map((item, i) => (
+                                    {this.props.rootStore.questionType.map((item, i) => (
                                         <Option value={item.id} key={item.id}>{item.name}</Option>
                                     ))}
                                 </Select>

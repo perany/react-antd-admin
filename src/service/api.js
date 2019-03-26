@@ -13,7 +13,7 @@ export default {
     // 工单回复
     reply: (data, config) => request.post('cs/feedback/reply', {data, ...config}),
     // 获取工单快速回复选项
-    fastReplyOptions: (data, config) => request.get('cs/quick-type/all', {data, ...config}),
+    fastReplyOptions: (data, config) => request.get('cs/quick-reply/all', {data, ...config}),
     // 获取快速回复列表
-    fastReplyList: (data, config) => request.get('cs/quick-type/list', {data, ...config}),
+    fastReplyList: (data, config) => request.get('cs/quick-reply/list', {data, ...config}),
 }

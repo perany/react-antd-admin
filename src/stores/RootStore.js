@@ -4,11 +4,13 @@ import config from '../utils/config'
 const LOCALE = 'ROOTSTORE_LOCALE'
 
 class RootStore {
-    @observable locale = 'en'
+
     @observable userInfo = {
         id: "0001",
         name: "pengyl@kingnet.com"
     }
+
+    @observable locale = 'en';
 
     @action loadLocale() {
         const dataStr = localStorage.getItem(LOCALE)
@@ -20,8 +22,14 @@ class RootStore {
     }
 
     @action changeLocale(locale) {
-        this.locale = locale
+        this.locale = locale;
         localStorage.setItem(LOCALE, locale)
+    }
+
+    @observable questionType = [];  //问题类型
+
+    @action changeQuestionType(questionType){
+        this.questionType = questionType;
     }
 }
 

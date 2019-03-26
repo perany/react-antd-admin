@@ -52,7 +52,7 @@ export default {
             url,
             method: 'GET',
             loading: false,
-            // params:config.data,
+            params:config.data,
             ...config
         })
     },

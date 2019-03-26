@@ -45,12 +45,12 @@ class OrderDetail extends Component {
                 this.setState({
                     id: res.data.id,
                     title: res.data.title,
-                    email: 'korea muscle man@gmail.com',  //todo 邮箱账户是什么字段
+                    email: 'korea muscle man@gmail.com',  //todo 邮箱账户 用户信息接口
                     contact: res.data.contact,
                     feedbackTime: res.data.created_at,
                     uid: res.data.user_id,
-                    type: res.data.type,    //todo 类型展示文字
-                    app: res.data.appid,    //todo 应用名称展示文字
+                    type: res.data.type,    //todo 类型展示文字  全局遍历
+                    app: res.data.appid,    //todo 应用名称 应用信息接口
                     status: res.data.status,
                     description: res.data.description,
                     resolver: res.data.customer_service,
