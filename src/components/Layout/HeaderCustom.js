@@ -71,11 +71,12 @@ class HeaderCustom extends Component {
             background: "#fff",
             color: "#667B99",
             borderRadius: "0.17rem",
-            fontSize: "0.34rem",
+            fontSize: "0.2rem",
             position: "relative",
-            top: "8px",
+            top: "3px",
             lineHeight: "0.34rem",
-            marginRight: "0.1rem"
+            marginRight: "0.1rem",
+            padding:'0.05rem'
         };
         const itemIconStyle = {
             marginRight: "0.1rem",
@@ -103,7 +104,7 @@ class HeaderCustom extends Component {
                             key="avatar"
                             title={
                                 <Fragment>
-                                    <IconFont type={"\ue63c"} style={userIconStyle}/>
+                                    <IconFont type={"\ue654"} style={userIconStyle}/>
                                     <span style={{"color": "#fff"}}>{this.props.user.realName}</span>
                                 </Fragment>}
                         >

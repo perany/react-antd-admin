@@ -99,6 +99,7 @@ class ReplyList extends Component {
                         }}/>
                         <span
                             className={tags.enabled === 1 ? styles.enabled : styles.disabled}>{tags.enabled === 1 ? '启用' : '禁用'}</span>
+                        // todo span同步改变
                     </div>
                 }
             }, {
