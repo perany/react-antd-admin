@@ -3,6 +3,7 @@ import {inject} from 'mobx-react'
 import styles from './FastReply.module.less'
 import {Button, Form, Input, Row, Select} from 'antd';
 import ReplyList from './ReplyList/ReplyList'
+import ReplyModal from "../../components/ReplyModal/ReplyModal";
 
 @inject("rootStore")
 @Form.create({name: 'order'})
@@ -14,13 +15,33 @@ class FastReply extends Component {
         this.state = {
             list: [],
             pageSize: 15,
-            total: 0
+            total: 0,
+            addModelVisible:false
         }
     }
 
     componentDidMount() {
         this.props.form.validateFields();
     }
+
+    // 新增按钮-弹窗切换可见
+    onAddModalVisible = (status) => {
+        this.setState({
+            addModelVisible: status
+        });
+    };
+
+    // 新增按钮-弹窗显示
+    showAddModal = () => {
+        this.setState({
+            addModelVisible: true
+        });
+    };
+
+    // 新增按钮-弹窗提交
+    submitAddModal = (data) => {
+        console.log("add:submit",data)
+    };
 
 
     // 列表子组件分页
@@ -54,11 +75,6 @@ class FastReply extends Component {
     handleSubmit = (e, pageSize, pageNow) => {
         e.preventDefault()
         this.pageChange(pageSize, pageNow)
-    }
-
-    // 新增 点击
-    addReply = e => {
-
     }
 
     render() {
@@ -106,7 +122,13 @@ class FastReply extends Component {
                         </Form.Item>
                     </Row>
                 </Form>
-                <Button type="primary" className={styles.add} onClick={this.addReply}>+ 新增</Button>
+                <Button type="primary" className={styles.add} onClick={this.showAddModal}>+ 新增</Button>
+                <ReplyModal
+                    visible={this.state.addModelVisible}
+                    onchange={this.onAddModalVisible}
+                    onsubmit={this.submitAddModal}
+                    isUpdate={false}
+                />
                 <ReplyList {...this.state} pageChange={this.pageChange}/>
             </div>
         )
