@@ -72,10 +72,10 @@ class OrderList extends Component {
                     'uid': item.user_id,
                     'type': item.type,
                     'title': item.title,
-                    'feedback': moment(parseInt(item.created_at)).format('YYYY-MM-DD hh:mm:ss'),
+                    'feedback': moment(parseInt(item.created_at)).format('YYYY-MM-DD HH:mm:ss'),
                     'status': item.status,
                     'resolver': item.customer_service,
-                    'resolveTime': moment(parseInt(item.updated_at)).format('YYYY-MM-DD hh:mm:ss'),
+                    'resolveTime': moment(parseInt(item.updated_at)).format('YYYY-MM-DD HH:mm:ss'),
                     'detail': item.id
                 })
             }

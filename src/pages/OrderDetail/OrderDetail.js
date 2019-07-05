@@ -97,7 +97,7 @@ class OrderDetail extends Component {
                 <span>处理人：{this.state.resolver}</span>
             </Row>
             <Row>
-                <span>处理时间：{moment(parseInt(this.state.resolveTime)).format('YYYY-MM-DD hh:mm:ss')}</span>
+                <span>处理时间：{moment(parseInt(this.state.resolveTime)).format('YYYY-MM-DD HH:mm:ss')}</span>
             </Row>
             <Row>
                 {this.state.resolveDesc}
@@ -122,7 +122,7 @@ class OrderDetail extends Component {
                             <span>联系方式：{this.state.contact}</span>
                         </Row>
                         <Row>
-                            <span>反馈时间：{moment(parseInt(this.state.feedbackTime)).format('YYYY-MM-DD hh:mm:ss')}</span>
+                            <span>反馈时间：{moment(parseInt(this.state.feedbackTime)).format('YYYY-MM-DD HH:mm:ss')}</span>
                             <span>UID：{this.state.uid}</span>
                         </Row>
                         <Row>
